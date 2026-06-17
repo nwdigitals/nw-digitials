@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>NW Digitals | Web Digital Agency</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="NW Digitals builds high-end, conversion-focused websites for modern businesses. Build trust, attract premium clients, and accelerate your business growth.">
+    <meta name="keywords" content="web design, digital agency, South Africa, website development, premium website, branding, SEO, NW Digitals">
+    <meta name="author" content="NW Digitals">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NW Digitals | Web Digital Agency">
+    <meta property="og:description" content="We design professional websites that help businesses build trust, attract customers, and grow online.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066FF',
+                        secondary: '#0F172A',
+                        accent: '#38BDF8',
+                        background: '#FFFFFF',
+                        textDark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out infinite 3s',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        /* Prevent Alpine.js Flash on Reload */
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0066FF;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-navbar {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(15, 23, 42, 0.05);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Custom Scroll Animation Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom glow effects */
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.35);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow-1 {
+            background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, rgba(15,23,42,0) 70%);
+        }
+        .ambient-glow-2 {
+            background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, rgba(15,23,42,0) 70%);
+        }
+    </style>
+</head>
+<body class="bg-background text-textDark font-sans overflow-x-hidden antialiased" x-data="{ mobileMenuOpen: false, selectedCategory: 'all', activeModal: null, showCalPopup: false, calPackageName: '', modalFormSubmitted: false, modalIsSubmitting: false, modalName: '', modalEmail: '', modalPhone: '', modalMessage: '' }">
+
+    <!-- TOP HEADER UTILITY (Urgency/Social Proof Banner) -->
+    <div class="bg-primary text-white text-center py-2 px-4 text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 overflow-hidden relative z-50">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Taking 3 Clients Per Month | Limited slots!</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-8 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 rounded-2xl glass-navbar border border-slate-800 transition-all duration-300" id="main-nav">
+        <div class="px-6 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="images/logo.png" alt="NW Digitals Logo" class="h-9 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                <span class="font-display font-extrabold text-xl tracking-tight text-white"><span class="text-primary">DIGITALS</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-primary transition-colors duration-200">About</a>
+                <a href="#services" class="hover:text-primary transition-colors duration-200">Services</a>
+                <a href="#process" class="hover:text-primary transition-colors duration-200">Our Process</a>
+                <a href="#portfolio" class="hover:text-primary transition-colors duration-200">Work</a>
+                <a href="#booking" class="hover:text-primary transition-colors duration-200">Book Call</a>
+                <a href="#pricing" class="hover:text-primary transition-colors duration-200">Pricing</a>
+                <a href="#faq" class="hover:text-primary transition-colors duration-200">FAQ</a>
+            </nav>
+
+            <!-- Desktop CTAs -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/27836620538?text=Hi%20NW%20Digitals,%20I'd%20like%20to%20discuss%20a%20website%20project!" target="_blank" class="text-slate-300 hover:text-white transition-colors duration-200 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.437 0 9.862-4.424 9.865-9.864.001-2.63-1.019-5.101-2.875-6.958C16.5 1.924 14.037.901 11.41.901c-5.441 0-9.866 4.424-9.869 9.866-.001 1.902.486 3.758 1.412 5.334L1.93 22.17l6.23-1.634zM17.3 14.39c-.32-.16-1.89-.93-2.185-1.04-.3-.11-.51-.17-.72.15-.22.3-.83 1.04-1.02 1.25-.19.21-.38.24-.7.08-.32-.16-1.34-.5-2.56-1.59-.95-.84-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.3.32-.51.11-.22.05-.41-.03-.57-.08-.16-.72-1.73-.99-2.39-.26-.64-.52-.55-.72-.56l-.61-.01c-.21 0-.55.08-.84.4-.29.31-1.12 1.1-1.12 2.68 0 1.58 1.15 3.11 1.31 3.32.16.21 2.26 3.46 5.48 4.85.77.33 1.36.53 1.83.68.77.24 1.47.21 2.03.12.62-.09 1.89-.77 2.15-1.48.27-.71.27-1.32.19-1.45-.08-.13-.3-.21-.62-.37z"/></svg>
+                    <span class="text-xs font-semibold tracking-wider uppercase">WhatsApp</span>
+                </a>
+                <button @click="showCalPopup = true; calPackageName = 'Custom Website'" class="px-5 py-2.5 bg-primary hover:bg-blue-600 text-white rounded-xl text-sm font-semibold transition-all duration-300 shadow-lg shadow-blue-500/20 glow-effect">
+                    Get Started
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button class="md:hidden text-white focus:outline-none" @click="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
+                <svg x-show="!mobileMenuOpen" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg x-show="mobileMenuOpen" x-cloak class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-5" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-5" class="md:hidden glass-navbar border-t border-slate-800 rounded-b-2xl absolute top-full left-0 w-full px-6 py-6 flex flex-col gap-5 text-slate-200">
+            <a href="#about" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">About</a>
+            <a href="#services" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">Services</a>
+            <a href="#process" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">Our Process</a>
+            <a href="#portfolio" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">Work</a>
+            <a href="#booking" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">Book Call</a>
+            <a href="#pricing" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">Pricing</a>
+            <a href="#faq" @click="mobileMenuOpen = false" class="hover:text-primary transition-colors text-lg font-medium py-1">FAQ</a>
+            <hr class="border-slate-800 my-2">
+            <div class="flex flex-col gap-4">
+                <a href="https://wa.me/27836620538?text=Hi%20NW%20Digitals,%20I'd%20like%20to%20discuss%20a%20website%20project!" target="_blank" class="w-full py-3 border border-slate-700 hover:border-slate-500 rounded-xl flex items-center justify-center gap-2 text-white font-medium transition-colors">
+                    <svg class="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.437 0 9.862-4.424 9.865-9.864.001-2.63-1.019-5.101-2.875-6.958C16.5 1.924 14.037.901 11.41.901c-5.441 0-9.866 4.424-9.869 9.866-.001 1.902.486 3.758 1.412 5.334L1.93 22.17l6.23-1.634zM17.3 14.39c-.32-.16-1.89-.93-2.185-1.04-.3-.11-.51-.17-.72.15-.22.3-.83 1.04-1.02 1.25-.19.21-.38.24-.7.08-.32-.16-1.34-.5-2.56-1.59-.95-.84-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.3.32-.51.11-.22.05-.41-.03-.57-.08-.16-.72-1.73-.99-2.39-.26-.64-.52-.55-.72-.56l-.61-.01c-.21 0-.55.08-.84.4-.29.31-1.12 1.1-1.12 2.68 0 1.58 1.15 3.11 1.31 3.32.16.21 2.26 3.46 5.48 4.85.77.33 1.36.53 1.83.68.77.24 1.47.21 2.03.12.62-.09 1.89-.77 2.15-1.48.27-.71.27-1.32.19-1.45-.08-.13-.3-.21-.62-.37z"/></svg>
+                    WhatsApp Chat
+                </a>
+                <button @click="mobileMenuOpen = false; showCalPopup = true; calPackageName = 'Custom Website'" class="w-full py-3 bg-primary hover:bg-blue-600 text-white rounded-xl text-center font-semibold shadow-lg shadow-blue-500/20">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-secondary text-white pt-48 pb-32 md:pb-44 overflow-hidden">
+        <!-- Ambient Glowing Background shapes -->
+        <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full ambient-glow-1 opacity-60 pointer-events-none"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full ambient-glow-2 opacity-50 pointer-events-none"></div>
+        
+        <!-- Animated grid pattern overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Left: Content -->
+                <div class="lg:col-span-7 flex flex-col items-start text-left">
+                    <!-- Premium tag -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-accent text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse-slow">
+                        <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                        Trusted Digital Agency
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.1] mb-6">
+                        Building Powerful <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-emerald-400">Digital Experiences</span> For Modern Businesses
+                    </h1>
+
+                    <!-- Subheadline -->
+                    <p class="text-slate-300 text-lg md:text-xl font-normal leading-relaxed mb-8 max-w-xl">
+                        We design professional websites that help businesses build trust, attract customers, and grow online.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                        <button @click="showCalPopup = true; calPackageName = 'Custom Website'" class="px-8 py-4 bg-primary hover:bg-blue-600 text-white rounded-xl text-base font-semibold text-center transition-all duration-300 shadow-xl shadow-blue-500/20 glow-effect flex items-center justify-center gap-2 group">
+                            <span>Get Started</span>
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                        <a href="#portfolio" class="px-8 py-4 bg-slate-800/80 hover:bg-slate-800 text-slate-100 rounded-xl text-base font-semibold text-center border border-slate-700/50 hover:border-slate-600 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>View Our Work</span>
+                        </a>
+                    </div>
+
+                    <!-- Interactive trust markers -->
+                    <div class="mt-12 pt-8 border-t border-slate-800/80 w-full grid grid-cols-3 gap-6 text-left">
+                        <div>
+                            <span class="block font-display font-bold text-2xl md:text-3xl text-white">100%</span>
+                            <span class="text-xs text-slate-400 font-medium tracking-wide uppercase">Satisfaction</span>
+                        </div>
+                        <div>
+                            <span class="block font-display font-bold text-2xl md:text-3xl text-white">5-Star</span>
+                            <span class="text-xs text-slate-400 font-medium tracking-wide uppercase">Google Rated</span>
+                        </div>
+                        <div>
+                            <span class="block font-display font-bold text-2xl md:text-3xl text-white">11</span>
+                            <span class="text-xs text-slate-400 font-medium tracking-wide uppercase">projects completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Agency Mockup Illustration -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <!-- Glowing back-elements -->
+                    <div class="absolute w-[280px] h-[280px] bg-primary/20 blur-[80px] rounded-full top-10 left-10 pointer-events-none animate-pulse-slow"></div>
+                    
+                    <div class="relative w-full max-w-[480px] lg:max-w-none animate-float">
+                        <!-- Main Laptop Mockup Image -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/60 bg-slate-900 p-2 group">
+                            <!-- Windows title bar representation -->
+                            <div class="flex items-center gap-1.5 pb-2 px-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/70 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/70 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/70 inline-block"></span>
+                                <span class="w-36 h-3 bg-slate-800 rounded ml-4 inline-block"></span>
+                            </div>
+                            <img src="images/hero-mockup.png" alt="NW Digitals Web Design Mockup" class="w-full h-auto rounded-lg object-cover border border-slate-800 hover:scale-[1.01] transition-all duration-500">
+                        </div>
+
+                        <!-- Floating Stat Badges -->
+                        <div class="absolute -top-6 -left-6 glass-card px-4 py-3 rounded-xl border border-slate-700/50 flex items-center gap-3 shadow-xl animate-float-delayed">
+                            <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-400 font-medium">Site Loading Speed</span>
+                                <span class="block text-sm font-bold text-white">0.4s Ultra-Fast</span>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-6 -right-6 glass-card px-4 py-3 rounded-xl border border-slate-700/50 flex items-center gap-3 shadow-xl animate-float">
+                            <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-400 font-medium">Conversion Focus</span>
+                                <span class="block text-sm font-bold text-white">SEO Optimized</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Wave Transition SVG to next section -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 bg-white">
+            <svg class="relative block w-full h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120 saturate-100" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V120H0V26.26C55.45,47.88,121.3,55.63,181.18,53.44Z" fill="#0F172A"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- TRUST LOGOS BANNER -->
+    <section class="py-12 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-center text-xs font-bold tracking-widest text-slate-400 uppercase mb-8">Empowering Growth Across Top Industries</p>
+            <div class="flex flex-wrap items-center justify-around gap-8 md:gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+                <!-- Logotype 1 -->
+                <div class="font-display font-extrabold text-lg text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-primary rounded"></span>SA TECH</div>
+                <!-- Logotype 2 -->
+                <div class="font-display font-extrabold text-lg text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#10B981] rounded"></span>CORE VENTURES</div>
+                <!-- Logotype 3 -->
+                <div class="font-display font-extrabold text-lg text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#8B5CF6] rounded"></span>ZENITH GLOBAL</div>
+                <!-- Logotype 4 -->
+                <div class="font-display font-extrabold text-lg text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-[#F59E0B] rounded"></span>ELITE PROPERTIES</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <!-- About Left: Premium Illustration/Stats Grid -->
+                <div class="lg:col-span-5 order-2 lg:order-1 reveal">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col justify-between h-[200px] hover:shadow-xl hover:shadow-slate-100 hover:scale-105 transition-all duration-300">
+                            <span class="text-4xl">🚀</span>
+                            <div>
+                                <h4 class="font-display font-bold text-xl text-secondary">High Velocity</h4>
+                                <p class="text-xs text-slate-500 mt-1">Super-fast deployment times & lightning-quick speeds.</p>
+                            </div>
+                        </div>
+                        <div class="p-8 rounded-2xl bg-blue-50/50 border border-blue-100/30 flex flex-col justify-between h-[200px] hover:shadow-xl hover:shadow-blue-50 hover:scale-105 transition-all duration-300 translate-y-6">
+                            <span class="text-4xl">💎</span>
+                            <div>
+                                <h4 class="font-display font-bold text-xl text-primary">Luxury UX</h4>
+                                <p class="text-xs text-slate-500 mt-1">Bespoke layouts tailored for maximum credibility.</p>
+                            </div>
+                        </div>
+                        <div class="p-8 rounded-2xl bg-emerald-50/50 border border-emerald-100/30 flex flex-col justify-between h-[200px] hover:shadow-xl hover:shadow-emerald-50 hover:scale-105 transition-all duration-300">
+                            <span class="text-4xl">📈</span>
+                            <div>
+                                <h4 class="font-display font-bold text-xl text-emerald-600">Growth Focus</h4>
+                                <p class="text-xs text-slate-500 mt-1">SEO-infused content structured to convert visits into revenue.</p>
+                            </div>
+                        </div>
+                        <div class="p-8 rounded-2xl bg-purple-50/50 border border-purple-100/30 flex flex-col justify-between h-[200px] hover:shadow-xl hover:shadow-purple-50 hover:scale-105 transition-all duration-300 translate-y-6">
+                            <span class="text-4xl">🛡️</span>
+                            <div>
+                                <h4 class="font-display font-bold text-xl text-purple-600">Elite Support</h4>
+                                <p class="text-xs text-slate-500 mt-1">Reliable, ongoing technical security & updates.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Right: Typography & Story -->
+                <div class="lg:col-span-7 order-1 lg:order-2 reveal">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-primary"></span>
+                        <span class="text-xs font-bold tracking-widest text-primary uppercase">Elite Digital Agency</span>
+                    </div>
+                    
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight text-secondary mb-6">
+                        About NW Digitals
+                    </h2>
+
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6 font-light">
+                        NW Digitals helps businesses establish a strong online presence through professional web design, branding, and digital solutions. Our focus is creating websites that build credibility, improve customer engagement, and drive business growth.
+                    </p>
+
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8 font-light">
+                        We don't just build websites; we craft powerful lead-generation assets. In today's digital age, your website is your digital storefront—it should look exceptional, perform beautifully, and serve as your highest-converting sales partner.
+                    </p>
+
+                    <!-- Bullet trust lists -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                        <div class="flex items-start gap-3">
+                            <div class="p-1 bg-blue-100 text-primary rounded-md mt-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <span class="font-medium text-secondary">Premium Corporate Visual Aesthetics</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-1 bg-blue-100 text-primary rounded-md mt-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <span class="font-medium text-secondary">Mobile-First, Responsive Architectures</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-1 bg-blue-100 text-primary rounded-md mt-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <span class="font-medium text-secondary">Advanced Custom WhatsApp Widgets</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-1 bg-blue-100 text-primary rounded-md mt-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <span class="font-medium text-secondary">SEO and Performance Driven Coding</span>
+                        </div>
+                    </div>
+
+                    <!-- Author quote -->
+                    <div class="flex items-center gap-4 p-4 border-l-4 border-primary bg-slate-50 rounded-r-xl">
+                        <p class="text-sm italic text-slate-500">
+                            "The difference between a standard website and a luxury digital asset is the attention paid to user psychological behavior and trust metrics. At NW Digitals, we engineer credibility."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION (Bento Grid Style) -->
+    <section id="services" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background accents -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] ambient-glow-1 opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+                    Expertise
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4">
+                    Our Premium Services
+                </h2>
+                <p class="text-slate-400 text-lg">
+                    We offer a full suite of strategic digital solutions engineered to amplify your brand authority and capture business opportunities online.
+                </p>
+            </div>
+
+            <!-- Bento-style Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                
+                <!-- Service 1 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Website Design</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Bespoke, high-end visual wireframes & interactive prototypes styled for premium enterprise positioning.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H17"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Website Redesign</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Breathe life back into outdated web interfaces. Enhance speeds, update branding, and skyrocket conversions.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Mobile Responsive</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Fluid design systems that adapt flawlessly across absolute mobile, tablet, and desktop interfaces.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Landing Pages</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Laser-focused marketing pages built specifically for targeted campaigns, lead capture, and maximum conversion rates.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Business Websites</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Multi-page corporate platforms equipped with CMS integration to catalog services and command authority.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Branding Solutions</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Distinct identity architecture, encompassing custom typography, color suites, logo variations, and style guides.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">WhatsApp Integration</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Dynamic conversational flows that funnel online traffic directly into active WhatsApp sales pipelines instantly.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Service 8 -->
+                <div class="glass-card hover:bg-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="mb-6">
+                        <div class="p-4 bg-blue-500/10 text-primary rounded-xl inline-block group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <!-- Icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white mt-6 mb-3">Website Maintenance</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Continuous speed checkups, security patch installations, cloud backups, and custom content revisions.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-accent group-hover:text-white text-xs font-bold tracking-wider uppercase flex items-center gap-2 mt-4 transition-colors">
+                        Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION (Premium Timeline visual) -->
+    <section id="process" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                    <span class="text-xs font-bold tracking-widest text-primary uppercase">Execution Blueprint</span>
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-secondary">
+                    Our Four-Step Process
+                </h2>
+                <p class="text-slate-500 text-lg mt-4">
+                    We've engineered a seamless, logical roadmap that takes your idea from pure strategic mapping to high-performing digital reality.
+                </p>
+            </div>
+
+            <!-- Desktop Horizontal Timeline (md and up) / Mobile Vertical Cards (sm and down) -->
+            <div class="relative hidden md:block reveal">
+                <!-- Center timeline accent bar -->
+                <div class="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-primary/10 via-primary to-accent/10 -translate-y-1/2 rounded-full"></div>
+                
+                <div class="grid grid-cols-4 gap-8 relative z-10">
+                    
+                    <!-- Step 01 -->
+                    <div class="group">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-300 relative mb-8 min-h-[190px]">
+                            <span class="absolute -bottom-5 right-6 font-display font-extrabold text-6xl text-primary/10 group-hover:text-primary/20 transition-colors">01</span>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-primary flex items-center justify-center font-display font-bold text-lg mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            </div>
+                            <h3 class="font-display font-bold text-xl text-secondary mb-2">Discovery</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Deep dive consultation to capture project requirements and identify exact target conversion behaviors.
+                            </p>
+                        </div>
+                        <!-- Connection Node -->
+                        <div class="flex justify-center">
+                            <div class="w-10 h-10 rounded-full border-4 border-white bg-primary shadow-lg flex items-center justify-center z-20 group-hover:scale-125 transition-all duration-300">
+                                <span class="w-2.5 h-2.5 rounded-full bg-white"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 02 -->
+                    <div class="group">
+                        <!-- Connection Node first so alternate alignment works or is structured beautifully -->
+                        <div class="flex justify-center mb-8">
+                            <div class="w-10 h-10 rounded-full border-4 border-white bg-accent shadow-lg flex items-center justify-center z-20 group-hover:scale-125 transition-all duration-300">
+                                <span class="w-2.5 h-2.5 rounded-full bg-white"></span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xl group-hover:shadow-2xl group-hover:translate-y-3 transition-all duration-300 relative min-h-[190px]">
+                            <span class="absolute -bottom-5 right-6 font-display font-extrabold text-6xl text-accent/15 group-hover:text-accent/30 transition-colors">02</span>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-accent flex items-center justify-center font-display font-bold text-lg mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                            </div>
+                            <h3 class="font-display font-bold text-xl text-secondary mb-2">Strategy</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Constructing sitemaps, information flows, wireframes, and target aesthetic alignment benchmarks.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 03 -->
+                    <div class="group">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-300 relative mb-8 min-h-[190px]">
+                            <span class="absolute -bottom-5 right-6 font-display font-extrabold text-6xl text-primary/10 group-hover:text-primary/20 transition-colors">03</span>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-primary flex items-center justify-center font-display font-bold text-lg mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            </div>
+                            <h3 class="font-display font-bold text-xl text-secondary mb-2">Design &amp; Dev</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Writing optimized code, importing stunning graphics, configuring SEO protocols and layouts.
+                            </p>
+                        </div>
+                        <!-- Connection Node -->
+                        <div class="flex justify-center">
+                            <div class="w-10 h-10 rounded-full border-4 border-white bg-primary shadow-lg flex items-center justify-center z-20 group-hover:scale-125 transition-all duration-300">
+                                <span class="w-2.5 h-2.5 rounded-full bg-white"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 04 -->
+                    <div class="group">
+                        <!-- Connection Node -->
+                        <div class="flex justify-center mb-8">
+                            <div class="w-10 h-10 rounded-full border-4 border-white bg-emerald-500 shadow-lg flex items-center justify-center z-20 group-hover:scale-125 transition-all duration-300">
+                                <span class="w-2.5 h-2.5 rounded-full bg-white"></span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xl group-hover:shadow-2xl group-hover:translate-y-3 transition-all duration-300 relative min-h-[190px]">
+                            <span class="absolute -bottom-5 right-6 font-display font-extrabold text-6xl text-emerald-500/10 group-hover:text-emerald-500/20 transition-colors">04</span>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-display font-bold text-lg mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <h3 class="font-display font-bold text-xl text-secondary mb-2">Launch &amp; Support</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Comprehensive pre-launch checkup, domain pairing, speed verification, and dedicated support systems.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile Vertical Timeline (sm and down) -->
+            <div class="block md:hidden space-y-8 relative">
+                <!-- Vertical accent bar -->
+                <div class="absolute top-0 bottom-0 left-6 w-1 bg-slate-100 rounded-full"></div>
+                
+                <!-- Mobile Step 1 -->
+                <div class="flex items-start gap-4 relative">
+                    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold shrink-0 z-10 shadow-lg">01</div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 w-full">
+                        <h3 class="font-display font-bold text-lg text-secondary mb-1">Discovery</h3>
+                        <p class="text-sm text-slate-500">Understanding your business goals inside and out to map conversion goals.</p>
+                    </div>
+                </div>
+
+                <!-- Mobile Step 2 -->
+                <div class="flex items-start gap-4 relative">
+                    <div class="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center font-display font-bold shrink-0 z-10 shadow-lg">02</div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 w-full">
+                        <h3 class="font-display font-bold text-lg text-secondary mb-1">Strategy</h3>
+                        <p class="text-sm text-slate-500">Formulating custom wireframes, asset architecture, and layout pathways.</p>
+                    </div>
+                </div>
+
+                <!-- Mobile Step 3 -->
+                <div class="flex items-start gap-4 relative">
+                    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-display font-bold shrink-0 z-10 shadow-lg">03</div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 w-full">
+                        <h3 class="font-display font-bold text-lg text-secondary mb-1">Design &amp; Development</h3>
+                        <p class="text-sm text-slate-500">Drafting elegant graphic elements and constructing responsive coding systems.</p>
+                    </div>
+                </div>
+
+                <!-- Mobile Step 4 -->
+                <div class="flex items-start gap-4 relative">
+                    <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center font-display font-bold shrink-0 z-10 shadow-lg">04</div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 w-full">
+                        <h3 class="font-display font-bold text-lg text-secondary mb-1">Launch &amp; Support</h3>
+                        <p class="text-sm text-slate-500">System testing, rapid server deployment, search pairing, and live care packages.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Accent circles -->
+        <div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full ambient-glow-2 opacity-30 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+                    Case Studies
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4">
+                    Our Featured Work
+                </h2>
+                <p class="text-slate-400 text-lg">
+                    Discover how we build strategic identity solutions and high-converting portals that drive concrete business impact.
+                </p>
+
+                <!-- Dynamic Filter Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 mt-10">
+                    <button @click="selectedCategory = 'all'" :class="selectedCategory === 'all' ? 'bg-primary text-white border-primary shadow-lg shadow-blue-500/10' : 'bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700'" class="px-5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider border transition-all duration-300">
+                        All Work
+                    </button>
+                    <button @click="selectedCategory = 'web'" :class="selectedCategory === 'web' ? 'bg-primary text-white border-primary shadow-lg shadow-blue-500/10' : 'bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700'" class="px-5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider border transition-all duration-300">
+                        Web Design
+                    </button>
+                    <button @click="selectedCategory = 'saas'" :class="selectedCategory === 'saas' ? 'bg-primary text-white border-primary shadow-lg shadow-blue-500/10' : 'bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700'" class="px-5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider border transition-all duration-300">
+                        Landing Pages
+                    </button>
+                    <button @click="selectedCategory = 'business'" :class="selectedCategory === 'business' ? 'bg-primary text-white border-primary shadow-lg shadow-blue-500/10' : 'bg-slate-800 text-slate-300 border-transparent hover:bg-slate-700'" class="px-5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider border transition-all duration-300">
+                        Business Sites
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                
+                <!-- Project 1 (Apex Commerce) -->
+                <div x-show="selectedCategory === 'all' || selectedCategory === 'web'" x-transition:enter="transition ease-out duration-300" class="group bg-slate-800 border border-slate-700/50 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Thumbnail with dynamic overlay on hover -->
+                        <div class="relative overflow-hidden aspect-video">
+                            <!-- Premium overlay gradient -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Apex Commerce Shopify Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider z-20 shadow-lg">E-Commerce</span>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-display font-bold text-2xl text-white mb-2">Apex Luxury Apparel</h3>
+                            <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                                A high-end Shopify custom checkout system & elegant store-front that yielded a massive 140% boost in checkout flow completions.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <button @click="activeModal = 1" class="w-full py-3 bg-slate-700 hover:bg-primary text-white rounded-xl text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                            <span>Case Details</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Vortex SaaS) -->
+                <div x-show="selectedCategory === 'all' || selectedCategory === 'saas'" x-transition:enter="transition ease-out duration-300" class="group bg-slate-800 border border-slate-700/50 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden aspect-video">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Vortex AI Marketing SaaS Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-accent text-slate-900 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider z-20 shadow-lg">Landing Page</span>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-display font-bold text-2xl text-white mb-2">Vortex AI Platforms</h3>
+                            <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                                An interactive SaaS single-page layout styled with glowing dark backgrounds, boosting lead-form captures by 88% overall.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <button @click="activeModal = 2" class="w-full py-3 bg-slate-700 hover:bg-primary text-white rounded-xl text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                            <span>Case Details</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Nova Clinic) -->
+                <div x-show="selectedCategory === 'all' || selectedCategory === 'business'" x-transition:enter="transition ease-out duration-300" class="group bg-slate-800 border border-slate-700/50 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden aspect-video">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop" alt="Nova Clinic Medical Website" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider z-20 shadow-lg font-sans">Business Site</span>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-display font-bold text-2xl text-white mb-2">Nova Medical Group</h3>
+                            <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                                A clinical business site integrated with a seamless medical reservation booking flow, lowering patient admin queues by 35%.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <button @click="activeModal = 3" class="w-full py-3 bg-slate-700 hover:bg-primary text-white rounded-xl text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                            <span>Case Details</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Dynamic Case Studies Modals (Overlays) -->
+        <!-- Case Modal 1 -->
+        <div x-show="activeModal === 1" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+            <div @click.away="activeModal = null" class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-8 md:p-10 shadow-2xl relative">
+                <button @click="activeModal = null" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">E-Commerce Project Details</span>
+                <h3 class="font-display font-extrabold text-3xl text-white mb-4">Apex Luxury Apparel</h3>
+                
+                <div class="space-y-6 text-slate-300 text-sm md:text-base">
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-1">Objective</h4>
+                        <p class="text-slate-400 font-light">Build a bespoke storefront that matches high-end French aesthetics while minimizing page load latency to avoid checkout drops.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-1">Solutions Provided</h4>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 font-light">
+                            <li>Bespoke Headless eCommerce system styling.</li>
+                            <li>Automated catalog filtration & custom dynamic search bar.</li>
+                            <li>Integrated responsive checkout screen UI.</li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                        <div>
+                            <span class="block text-2xl font-bold text-primary">+140%</span>
+                            <span class="text-xs text-slate-500">Checkout Conversions</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-bold text-emerald-400">0.35s</span>
+                            <span class="text-xs text-slate-500">Server Response Time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Modal 2 -->
+        <div x-show="activeModal === 2" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+            <div @click.away="activeModal = null" class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-8 md:p-10 shadow-2xl relative">
+                <button @click="activeModal = null" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-accent text-xs font-bold uppercase tracking-wider mb-4">Landing Page Details</span>
+                <h3 class="font-display font-extrabold text-3xl text-white mb-4">Vortex AI Platforms</h3>
+                
+                <div class="space-y-6 text-slate-300 text-sm md:text-base">
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-1">Objective</h4>
+                        <p class="text-slate-400 font-light">Design a highly visual single-page SaaS lead capturing page with interactive dashboard previews to drive software trial sign-ups.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-1">Solutions Provided</h4>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 font-light">
+                            <li>Lottie animated dashboard illustrations and glowing indicators.</li>
+                            <li>Sticky bottom/top mobile-optimized CTA structures.</li>
+                            <li>Speed-cached vector asset compression for rapid rendering.</li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                        <div>
+                            <span class="block text-2xl font-bold text-accent">+88%</span>
+                            <span class="text-xs text-slate-500">Trial Inquiries Added</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-bold text-emerald-400">99/100</span>
+                            <span class="text-xs text-slate-500">Google Speed Metric</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Modal 3 -->
+        <div x-show="activeModal === 3" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+            <div @click.away="activeModal = null" class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-8 md:p-10 shadow-2xl relative">
+                <button @click="activeModal = null" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">Business Site Details</span>
+                <h3 class="font-display font-extrabold text-3xl text-white mb-4">Nova Medical Group</h3>
+                
+                <div class="space-y-6 text-slate-300 text-sm md:text-base">
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-1">Objective</h4>
+                        <p class="text-slate-400 font-light">Modernize the medical practices identity to make registration straightforward, secure, and fully compliant with booking privacy rules.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-1">Solutions Provided</h4>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400 font-light">
+                            <li>Clean minimalist white layout designed to ease consumer anxieties.</li>
+                            <li>Advanced, secure reservation calendar scheduling platform.</li>
+                            <li>Strict automated compliance database encryption protocols.</li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                        <div>
+                            <span class="block text-2xl font-bold text-emerald-400">-35%</span>
+                            <span class="text-xs text-slate-500">Frontdesk Queues Reduced</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-bold text-primary">100%</span>
+                            <span class="text-xs text-slate-500">Privacy Compliant API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                    <span class="text-xs font-bold tracking-widest text-primary uppercase">Client Success Stories</span>
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-secondary">
+                    What Our Partners Say
+                </h2>
+                <p class="text-slate-500 text-lg mt-4">
+                    We measure our success by the scale of growth we unlock for our clients. Here is how we help businesses win online.
+                </p>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                
+                <!-- Testimonial 1 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100/80 hover:shadow-xl hover:shadow-slate-100 hover:scale-102 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Stars -->
+                        <div class="flex gap-1 text-amber-400 mb-6">
+                            <span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-8">
+                            "NW Digitals transformed our online presence! The new website is not only stunning, but our conversion rate has doubled in just 30 days. Their professionalism and attention to detail are unmatched."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" alt="Sarah Jenkins" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-secondary">Sarah Jenkins</h4>
+                            <span class="text-xs text-slate-400">Founder, Aura Coffee</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100/80 hover:shadow-xl hover:shadow-slate-100 hover:scale-102 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-1 text-amber-400 mb-6">
+                            <span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-8">
+                            "Working with NW Digitals was a game-changer for our agency. They delivered a fast, mobile-responsive portal that our clients love using. The WhatsApp integration has drastically increased our daily inquiries."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" alt="David Ndlovu" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-secondary">David Ndlovu</h4>
+                            <span class="text-xs text-slate-400">MD, Elite Estates</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100/80 hover:shadow-xl hover:shadow-slate-100 hover:scale-102 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-1 text-amber-400 mb-6">
+                            <span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-8">
+                            "Our patient booking process has become completely seamless. NW Digitals designed an elegant, high-performance website that instantly builds trust with our patients. Highly recommended!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop" alt="Dr. Amara Okereke" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-secondary">Dr. Amara Okereke</h4>
+                            <span class="text-xs text-slate-400">Founder, Nova Clinic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100/80 hover:shadow-xl hover:shadow-slate-100 hover:scale-102 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-1 text-amber-400 mb-6">
+                            <span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span><span class="text-lg">★</span>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-8">
+                            "Absolutely outstanding development. They took our complex SaaS requirements and turned them into a fast, beautiful, and intuitive user experience. The level of support post-launch is phenomenal."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop" alt="Marcus Stone" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-secondary">Marcus Stone</h4>
+                            <span class="text-xs text-slate-400">Tech Lead, Vortex AI</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE BOOKING SYSTEM SECTION -->
+    <section id="booking" class="py-24 bg-slate-50 border-t border-b border-slate-100 relative overflow-hidden">
+        <!-- Subtle details -->
+        <div class="absolute top-1/2 left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/2 right-[-10%] w-[40%] h-[40%] rounded-full bg-sky-500/5 blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                    <span class="text-xs font-bold tracking-widest text-primary uppercase">Secure Your Slot</span>
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-secondary">
+                    Schedule Your Free Strategy Session
+                </h2>
+                <p class="text-slate-500 text-lg mt-4">
+                    Skip the email tennis and messy scheduling charts. Choose a time below to align directly on your goals with our lead digital architect.
+                </p>
+            </div>
+
+            <!-- Booking Frame Container -->
+            <div class="max-w-5xl mx-auto rounded-3xl bg-white border border-slate-200/60 shadow-2xl overflow-hidden reveal">
+                <!-- Top Panel Bar decoration -->
+                <div class="bg-slate-900 px-6 py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                    </div>
+                    <span class="text-xs font-semibold tracking-wider text-slate-400 uppercase">NW Digitals Secure Calendar Booking</span>
+                    <div class="w-12 h-2"></div>
+                </div>
+
+                <!-- Cal.com Booking Widget Embed -->
+                <div class="relative w-full h-[650px] bg-white overflow-hidden">
+                    <iframe src="https://cal.com/nw-digitals-1icjcq" class="w-full h-full border-none" style="min-width: 320px;" allow="calendar-write"></iframe>
+                </div>
+            </div>
+            
+            <!-- Quick notes on what to expect -->
+            <div class="max-w-3xl mx-auto mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center reveal">
+                <div class="p-4 bg-white rounded-xl border border-slate-100">
+                    <span class="block text-xl mb-1">⏱️</span>
+                    <h4 class="font-bold text-sm text-secondary">15-Min Meeting</h4>
+                    <p class="text-xs text-slate-400 mt-1">Short, focused, and highly structured discovery alignment.</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl border border-slate-100">
+                    <span class="block text-xl mb-1">💡</span>
+                    <h4 class="font-bold text-sm text-secondary">Custom Blueprint</h4>
+                    <p class="text-xs text-slate-400 mt-1">Walk away with clear layout and tech stack recommendations.</p>
+                </div>
+                <div class="p-4 bg-white rounded-xl border border-slate-100">
+                    <span class="block text-xl mb-1">💰</span>
+                    <h4 class="font-bold text-sm text-secondary">Zero Commitment</h4>
+                    <p class="text-xs text-slate-400 mt-1">100% free consultation. No credit cards or obligations.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Accent circles -->
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full ambient-glow-1 opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+                    Investment
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4">
+                    Honest, Transparent Pricing
+                </h2>
+                <p class="text-slate-400 text-lg">
+                    Select the ideal deployment structure for your business. Absolutely no hidden fees or monthly hosting markups.
+                </p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch reveal">
+                
+                <!-- Package 1: Starter -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between hover:border-slate-700 hover:scale-102 transition-all duration-300">
+                    <div>
+                        <div class="mb-6">
+                            <span class="text-xs font-bold tracking-widest text-slate-400 uppercase"> Businesses Package</span>
+                            <div class="mt-4 flex items-baseline">
+                                <span class="text-4xl font-extrabold text-white">R2,499</span>
+                                <span class="text-xs text-slate-500 ml-2">One-time fee</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-2">Excellent for startups, local freelancers, or quick landing pages.</p>
+                        </div>
+                        <hr class="border-slate-800 my-6">
+                        <ul class="space-y-4 text-xs font-medium text-slate-300">
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Professional 1–3 Page Website
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Mobile Responsive Design
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                WhatsApp Integration
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Contact Form
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Basic SEO Setup
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Social Media Links
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Google Maps Integration
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                14 Days Support
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-8">
+                        <button @click="showCalPopup = true; calPackageName = 'Business'" class="block w-full text-center py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold tracking-wider uppercase transition-colors">
+                            Select Business
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 2: Business (Popular Highlight) -->
+                <div class="relative bg-gradient-to-b from-primary/10 to-transparent border-2 border-primary p-8 rounded-3xl flex flex-col justify-between hover:scale-105 transition-all duration-300 shadow-2xl shadow-blue-500/10">
+                    <!-- Popular Tag Ribbon -->
+                    <span class="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow">
+                        Most Popular
+                    </span>
+                    <div>
+                        <div class="mb-6">
+                            <span class="text-xs font-bold tracking-widest text-primary uppercase">Professional Package</span>
+                            <div class="mt-4 flex items-baseline">
+                                <span class="text-4xl font-extrabold text-white">R4,999</span>
+                                <span class="text-xs text-primary/80 ml-2">One-time fee</span>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-2">Bespoke dynamic multipage sites ideal for growing businesses & clinics.</p>
+                        </div>
+                        <hr class="border-slate-800/80 my-6">
+                        <ul class="space-y-4 text-xs font-medium text-slate-200">
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Up to 6 Pages
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Professional Custom Design
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Mobile Responsive Design
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                WhatsApp Integration
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Contact Forms
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Services Section
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Gallery Section
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Google Maps Integration
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Basic SEO Setup
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Speed Optimization
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                30 Days Support
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-8">
+                        <button @click="showCalPopup = true; calPackageName = 'Pro'" class="block w-full text-center py-4 bg-primary hover:bg-blue-600 text-white rounded-xl text-xs font-bold tracking-wider uppercase transition-colors shadow-lg shadow-blue-500/25 glow-effect">
+                            Get Pro Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 3: Premium -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between hover:border-slate-700 hover:scale-102 transition-all duration-300">
+                    <div>
+                        <div class="mb-6">
+                            <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Premium Package</span>
+                            <div class="mt-4 flex items-baseline">
+                                <span class="text-4xl font-extrabold text-white">R9,999</span>
+                                <span class="text-xs text-slate-500 ml-2">One-time fee</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-2">Bespoke dynamic solutions, custom SaaS features, or e-commerce storefronts.</p>
+                        </div>
+                        <hr class="border-slate-800 my-6">
+                        <ul class="space-y-4 text-xs font-medium text-slate-300">
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Up to 10 Pages
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Premium Custom Design
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Advanced Animations
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Mobile Responsive Design
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                WhatsApp Integration
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Gallery & Portfolio
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Blog/News Section
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Advanced SEO Setup
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Speed Optimization
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Priority Support
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                60 Days Support
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-8">
+                        <button @click="showCalPopup = true; calPackageName = 'Premium'" class="block w-full text-center py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold tracking-wider uppercase transition-colors">
+                            Select Premium
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                    <span class="text-xs font-bold tracking-widest text-primary uppercase">Got Questions?</span>
+                    <span class="h-[2px] w-8 bg-primary"></span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-secondary">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-slate-500 text-lg mt-4">
+                    Find clarity on pricing, technical handovers, execution timelines, and support infrastructure details.
+                </p>
+            </div>
+
+            <!-- Accordion items using Alpine.js for smooth operations -->
+            <div class="space-y-4 reveal" x-data="{ activeFAQ: null }">
+                
+                <!-- FAQ 1 -->
+                <div class="border border-slate-100 rounded-2xl bg-slate-50 overflow-hidden transition-all duration-300">
+                    <button @click="activeFAQ = activeFAQ === 1 ? null : 1" class="w-full px-6 py-5 flex items-center justify-between text-left text-secondary font-display font-semibold text-lg hover:bg-slate-100/50 transition-colors focus:outline-none">
+                        <span>How much does a custom website cost?</span>
+                        <svg :class="activeFAQ === 1 ? 'rotate-180 text-primary' : 'text-slate-400'" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="activeFAQ === 1" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]" class="px-6 pb-6 text-sm text-slate-500 leading-relaxed font-light">
+                        Our pricing starts at R2,4999 for the Business Package (perfect for simple landing pages or startups) up to R9,999+ for Premium Packages. We also offer tailored solutions for enterprise-level applications with complex databases.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-slate-100 rounded-2xl bg-slate-50 overflow-hidden transition-all duration-300">
+                    <button @click="activeFAQ = activeFAQ === 2 ? null : 2" class="w-full px-6 py-5 flex items-center justify-between text-left text-secondary font-display font-semibold text-lg hover:bg-slate-100/50 transition-colors focus:outline-none">
+                        <span>How long does it take to complete a project?</span>
+                        <svg :class="activeFAQ === 2 ? 'rotate-180 text-primary' : 'text-slate-400'" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="activeFAQ === 2" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]" class="px-6 pb-6 text-sm text-slate-500 leading-relaxed font-light">
+                        A typical landing page or Starter website takes 5–7 business days. A Business Package takes 2–3 weeks, while more complex custom web applications (Premium Package) can take 4–6 weeks depending on the technical requirements and feature complexity.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-slate-100 rounded-2xl bg-slate-50 overflow-hidden transition-all duration-300">
+                    <button @click="activeFAQ = activeFAQ === 3 ? null : 3" class="w-full px-6 py-5 flex items-center justify-between text-left text-secondary font-display font-semibold text-lg hover:bg-slate-100/50 transition-colors focus:outline-none">
+                        <span>Do you offer website maintenance and updates?</span>
+                        <svg :class="activeFAQ === 3 ? 'rotate-180 text-primary' : 'text-slate-400'" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="activeFAQ === 3" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]" class="px-6 pb-6 text-sm text-slate-500 leading-relaxed font-light">
+                        Yes! We offer monthly maintenance plans to keep your website secure, updated, and performing at its best. This includes security monitoring, content updates, regular cloud backups, and performance optimization checks.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-slate-100 rounded-2xl bg-slate-50 overflow-hidden transition-all duration-300">
+                    <button @click="activeFAQ = activeFAQ === 4 ? null : 4" class="w-full px-6 py-5 flex items-center justify-between text-left text-secondary font-display font-semibold text-lg hover:bg-slate-100/50 transition-colors focus:outline-none">
+                        <span>What are the hosting and domain costs?</span>
+                        <svg :class="activeFAQ === 4 ? 'rotate-180 text-primary' : 'text-slate-400'" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="activeFAQ === 4" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]" class="px-6 pb-6 text-sm text-slate-500 leading-relaxed font-light">
+                        We help you set up premium high-speed hosting and domain registration. While hosting and domain fees are billed directly by the domain registrar (typically ranging R100-R250/month), we handle the full technical configuration and integration for free in all packages.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="border border-slate-100 rounded-2xl bg-slate-50 overflow-hidden transition-all duration-300">
+                    <button @click="activeFAQ = activeFAQ === 5 ? null : 5" class="w-full px-6 py-5 flex items-center justify-between text-left text-secondary font-display font-semibold text-lg hover:bg-slate-100/50 transition-colors focus:outline-none">
+                        <span>Can I update the website content myself?</span>
+                        <svg :class="activeFAQ === 5 ? 'rotate-180 text-primary' : 'text-slate-400'" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="activeFAQ === 5" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]" class="px-6 pb-6 text-sm text-slate-500 leading-relaxed font-light">
+                        Absolutely! All our websites are built with user-friendly content management systems (CMS) or clean modular custom blocks. We provide a full video walkthrough tutorial at launch showing you how to easily update text, images, and blog posts without touching any code.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+     <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full ambient-glow-2 opacity-30 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                
+                <!-- Contact Left: Details & Channels -->
+                <div class="lg:col-span-5 reveal">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-primary"></span>
+                        <span class="text-xs font-bold tracking-widest text-accent uppercase">Let's Discuss</span>
+                    </div>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight text-white mb-6">
+                        Ready To Grow Your Business Online?
+                    </h2>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-10 font-light">
+                        Get in touch for a 100% free strategic consultation. We'll examine your existing branding and construct a blueprint specifically mapped for your business metrics.
+                    </p>
+
+                    <!-- Contact Details cards -->
+                    <div class="space-y-6">
+                        <!-- Channel: Phone -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-800">
+                            <div class="p-3 bg-blue-500/10 text-primary rounded-lg">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide">Call Directly</span>
+                                <a href="tel:+27836620538" class="text-white hover:text-primary transition-colors font-bold">+27 83 662 0538</a>
+                            </div>
+                        </div>
+
+                        <!-- Channel: Email -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-800">
+                            <div class="p-3 bg-blue-500/10 text-primary rounded-lg">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide">Send an Email</span>
+                                <a href="mailto:nwdigitalss@gmail.com" class="text-white hover:text-primary transition-colors font-bold">nwdigitalss@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Channel: WhatsApp Floating CTA Button -->
+                        <div class="pt-4">
+                            <a href="https://wa.me/27836620538?text=Hi%20NW%20Digitals,%20I'd%20like%20to%20discuss%20a%20website%20project!" target="_blank" class="inline-flex items-center gap-3 px-6 py-4 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl font-bold tracking-wide transition-all duration-300 shadow-xl shadow-emerald-500/10">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.437 0 9.862-4.424 9.865-9.864.001-2.63-1.019-5.101-2.875-6.958C16.5 1.924 14.037.901 11.41.901c-5.441 0-9.866 4.424-9.869 9.866-.001 1.902.486 3.758 1.412 5.334L1.93 22.17l6.23-1.634zM17.3 14.39c-.32-.16-1.89-.93-2.185-1.04-.3-.11-.51-.17-.72.15-.22.3-.83 1.04-1.02 1.25-.19.21-.38.24-.7.08-.32-.16-1.34-.5-2.56-1.59-.95-.84-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.3.32-.51.11-.22.05-.41-.03-.57-.08-.16-.72-1.73-.99-2.39-.26-.64-.52-.55-.72-.56l-.61-.01c-.21 0-.55.08-.84.4-.29.31-1.12 1.1-1.12 2.68 0 1.58 1.15 3.11 1.31 3.32.16.21 2.26 3.46 5.48 4.85.77.33 1.36.53 1.83.68.77.24 1.47.21 2.03.12.62-.09 1.89-.77 2.15-1.48.27-.71.27-1.32.19-1.45-.08-.13-.3-.21-.62-.37z"/></svg>
+                                <span>Chat Directly on WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Right: High-Converting Form (CONNECTED TO WEB3FORMS) -->
+                <div class="lg:col-span-7 bg-slate-800/80 border border-slate-800 p-8 md:p-10 rounded-3xl relative reveal" 
+                     x-data="{ 
+                         formSubmitted: false, 
+                         isSubmitting: false, 
+                         name: '', 
+                         email: '', 
+                         phone: '', 
+                         message: '', 
+                         package: 'Business',
+                         accessKey: 'f2bd89f4-47d4-49c9-b559-16752fd4247e'}">
+                    
+                    <!-- Pre-submission block -->
+                    <div x-show="!formSubmitted">
+                        <h3 class="font-display font-bold text-2xl text-white mb-2">Request A Proposal</h3>
+                        <p class="text-xs text-slate-400 mb-8">We usually respond with a custom layout blueprint in under 12 hours.</p>
+                        
+                        <form @submit.prevent="
+                            isSubmitting = true;
+                            fetch('https://api.web3forms.com/submit', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    access_key: accessKey,
+                                    name: name,
+                                    email: email,
+                                    phone: phone,
+                                    package: package,
+                                    message: message,
+                                    subject: 'New Website Proposal Request from ' + name
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                isSubmitting = false;
+                                if(data.success) {
+                                    formSubmitted = true;
+                                } else {
+                                    alert('Submission failed: ' + data.message);
+                                }
+                            })
+                            .catch(err => {
+                                isSubmitting = false;
+                                alert('Connection error. Please check your internet and try again.');
+                            });
+                        " class="space-y-6">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Field Name -->
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Your Name *</label>
+                                    <input type="text" x-model="name" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300" placeholder="e.g. David Ndlovu">
+                                </div>
+                                <!-- Field Email -->
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Email Address *</label>
+                                    <input type="email" x-model="email" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300" placeholder="e.g. david@eliteestates.co.za">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Field Phone -->
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Phone Number</label>
+                                    <input type="tel" x-model="phone" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300" placeholder="e.g. +27 83 662 0538">
+                                </div>
+                                <!-- Field Package -->
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Interested Package</label>
+                                    <select id="package-select" x-model="package" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300">
+                                        <option value="Starter">Business Package (R2,499)</option>
+                                        <option value="Business">Pro Package (R4,999)</option>
+                                        <option value="Premium">Premium Package (R9,999)</option>
+                                        <option value="Custom">Tailored Custom Application</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Field Message -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Project Brief Details *</label>
+                                <textarea x-model="message" required rows="4" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300 resize-none" placeholder="Briefly explain your business domain, objectives, and any target design layouts you like."></textarea>
+                            </div>
+
+                            <!-- Interactive Button -->
+                            <button type="submit" :disabled="isSubmitting" class="w-full py-4 bg-primary hover:bg-blue-600 disabled:bg-slate-700 text-white font-bold rounded-xl tracking-wide uppercase transition-all duration-300 shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2 group">
+                                <span x-show="!isSubmitting">Send Request</span>
+                                <span x-show="isSubmitting" x-cloak class="flex items-center gap-2">
+                                    <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+                                    Processing Blueprint...
+                                </span>
+                                <svg x-show="!isSubmitting" class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Post-submission block -->
+                    <div x-show="formSubmitted" x-cloak class="text-center py-12 flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-3xl text-white mb-2">Proposal Received!</h3>
+                        <p class="text-slate-400 text-sm max-w-md mx-auto mb-8">
+                            Thank you, <span class="text-white font-semibold" x-text="name"></span>. Our primary digital architect has queued your requirements. We will analyze your inputs and email a custom roadmap to <span class="text-white font-semibold" x-text="email"></span> shortly.
+                        </p>
+                        <button @click="formSubmitted = false; name=''; email=''; phone=''; message=''" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors">
+                            Submit Another Request
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-[#0A0E1A] text-slate-400 pt-20 pb-10 border-t border-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+                
+                <!-- Footer logo and description -->
+                <div class="lg:col-span-4 flex flex-col items-start">
+                    <a href="#" class="flex items-center gap-3 mb-6 group">
+                        <img src="images/logo.png" alt="NW Digitals Logo" class="h-9 w-auto object-contain">
+                        <span class="font-display font-extrabold text-xl tracking-tight text-white"><span class="text-primary">DIGITALS</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-8 max-w-sm">
+                        High-end corporate website designs, brand identity construction, and active conversational systems built to secure conversions and trust.
+                    </p>
+                    <!-- Social icons -->
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/profile.php?id=61589729277553" class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/nw_digitals/" class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/nw-digitals-255688409/" class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors" aria-label="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Quick Links -->
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#about" class="hover:text-primary transition-colors">About Agency</a></li>
+                        <li><a href="#process" class="hover:text-primary transition-colors">Our Process</a></li>
+                        <li><a href="#portfolio" class="hover:text-primary transition-colors">Featured Work</a></li>
+                        <li><a href="#booking" class="hover:text-primary transition-colors">Book Strategy Call</a></li>
+                        <li><a href="#faq" class="hover:text-primary transition-colors">FAQ Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Services -->
+                <div class="lg:col-span-3">
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-6">Services Suite</h4>
+                    <ul class="space-y-4 text-sm col-span-2">
+                        <li><a href="#services" class="hover:text-primary transition-colors">Website Design</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Mobile Responsive Design</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">WhatsApp Conversions</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Business CMS Platforms</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Digital Branding Solutions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Contact Details info -->
+                <div class="lg:col-span-2">
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-6">Get In Touch</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span>📱</span>
+                            <a href="tel:+27836620538" class="hover:text-white transition-colors font-semibold text-slate-300">+27 83 662 0538</a>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span>✉️</span>
+                            <a href="mailto:nwdigitalss@gmail.com" class="hover:text-white transition-colors font-semibold text-slate-300">nwdigitalss@gmail.com</a>
+                        </li>
+                        <li class="text-slate-500 text-xs mt-2">
+                            North West,<br>South Africa
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <hr class="border-slate-900 my-8">
+
+            <!-- Footer Bottom panel -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 NW Digitals. All Rights Reserved. Built with Precision and Credibility.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CONTACT FORM POPUP MODAL -->
+    <div x-show="showCalPopup" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @click.away="showCalPopup = false" class="bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative border border-slate-800" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="scale-95 translate-y-4" x-transition:enter-end="scale-100 translate-y-0">
+            <!-- Modal Header bar -->
+            <div class="bg-slate-950 px-6 py-4 flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                </div>
+                <span class="text-xs font-bold tracking-wider text-slate-300 uppercase">
+                    Get Started: <span class="text-primary" x-text="calPackageName"></span> Package
+                </span>
+                <button @click="showCalPopup = false" class="text-slate-400 hover:text-white p-1 rounded-xl bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <!-- Popup Contact Form Panel -->
+            <div class="p-8 md:p-10">
+                
+                <!-- Pre-submission block -->
+                <div x-show="!modalFormSubmitted">
+                    <h3 class="font-display font-bold text-2xl text-white mb-2 text-left">Request A Proposal</h3>
+                    <p class="text-xs text-slate-400 mb-8 text-left">Let's build your <span class="text-primary font-semibold" x-text="calPackageName"></span> website. We respond in under 12 hours.</p>
+                    
+                    <form @submit.prevent="
+                        modalIsSubmitting = true;
+                        fetch('https://api.web3forms.com/submit', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                access_key: 'f2bd89f4-47d4-49c9-b559-16752fd4247e',
+                                name: modalName,
+                                email: modalEmail,
+                                phone: modalPhone,
+                                package: calPackageName,
+                                message: modalMessage,
+                                subject: 'Popup Inquiry: ' + calPackageName + ' Package from ' + modalName
+                            })
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            modalIsSubmitting = false;
+                            if(data.success) {
+                                modalFormSubmitted = true;
+                            } else {
+                                alert('Submission failed: ' + data.message);
+                            }
+                        })
+                        .catch(err => {
+                            modalIsSubmitting = false;
+                            alert('Connection error. Please check your internet and try again.');
+                        });
+                    " class="space-y-6 text-left">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Field Name -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Your Name *</label>
+                                <input type="text" x-model="modalName" required class="w-full px-4 py-3 bg-slate-950 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300" placeholder="e.g. David Ndlovu">
+                            </div>
+                            <!-- Field Email -->
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Email Address *</label>
+                                <input type="email" x-model="modalEmail" required class="w-full px-4 py-3 bg-slate-950 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300" placeholder="e.g. david@eliteestates.co.za">
+                            </div>
+                        </div>
+
+                        <!-- Field Phone -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Phone Number</label>
+                            <input type="tel" x-model="modalPhone" class="w-full px-4 py-3 bg-slate-950 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300" placeholder="e.g. +27 83 662 0538">
+                        </div>
+
+                        <!-- Field Message -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Project Brief Details *</label>
+                            <textarea x-model="modalMessage" required rows="4" class="w-full px-4 py-3 bg-slate-950 border border-slate-700/60 rounded-xl text-white text-sm focus:outline-none focus:border-primary transition-all duration-300 resize-none" placeholder="Briefly explain your business domain and objectives."></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" :disabled="modalIsSubmitting" class="w-full py-4 bg-primary hover:bg-blue-600 disabled:bg-slate-700 text-white font-bold rounded-xl tracking-wide uppercase transition-all duration-300 shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2 group">
+                            <span x-show="!modalIsSubmitting">Send Proposal Request</span>
+                            <span x-show="modalIsSubmitting" x-cloak class="flex items-center gap-2">
+                                <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+                                Sending Request...
+                            </span>
+                            <svg x-show="!modalIsSubmitting" class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Post-submission block -->
+                <div x-show="modalFormSubmitted" x-cloak class="text-center py-12 flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="font-display font-bold text-3xl text-white mb-2">Proposal Received!</h3>
+                    <p class="text-slate-400 text-sm max-w-md mx-auto mb-8">
+                        Thank you, <span class="text-white font-semibold" x-text="modalName"></span>. We have registered your request for the <span class="text-primary font-bold" x-text="calPackageName"></span> Package. Our primary digital architect will review your details and send your customized roadmap to <span class="text-white font-semibold" x-text="modalEmail"></span> shortly.
+                    </p>
+                    <button @click="showCalPopup = false; modalFormSubmitted = false; modalName=''; modalEmail=''; modalPhone=''; modalMessage=''" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors">
+                        Close Window
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCROLL-TO-TOP BUTTON & WHATSAPP FLOATING BADGE -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-4">
+        <!-- Floating Active WhatsApp Icon widget -->
+        <a href="https://wa.me/27836620538?text=Hi%20NW%20Digitals,%20I'd%20like%20to%20discuss%20a%20website%20project!" target="_blank" class="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95 group relative ripple-effect" aria-label="Chat on WhatsApp">
+            <!-- Pulsing outer circle badge -->
+            <span class="absolute -inset-1 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none"></span>
+            <svg class="w-7.5 h-7.5" fill="currentColor" viewBox="0 0 24 24" width="28" height="28"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.437 0 9.862-4.424 9.865-9.864.001-2.63-1.019-5.101-2.875-6.958C16.5 1.924 14.037.901 11.41.901c-5.441 0-9.866 4.424-9.869 9.866-.001 1.902.486 3.758 1.412 5.334L1.93 22.17l6.23-1.634zM17.3 14.39c-.32-.16-1.89-.93-2.185-1.04-.3-.11-.51-.17-.72.15-.22.3-.83 1.04-1.02 1.25-.19.21-.38.24-.7.08-.32-.16-1.34-.5-2.56-1.59-.95-.84-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.3.32-.51.11-.22.05-.41-.03-.57-.08-.16-.72-1.73-.99-2.39-.26-.64-.52-.55-.72-.56l-.61-.01c-.21 0-.55.08-.84.4-.29.31-1.12 1.1-1.12 2.68 0 1.58 1.15 3.11 1.31 3.32.16.21 2.26 3.46 5.48 4.85.77.33 1.36.53 1.83.68.77.24 1.47.21 2.03.12.62-.09 1.89-.77 2.15-1.48.27-.71.27-1.32.19-1.45-.08-.13-.3-.21-.62-.37z"/></svg>
+            <span class="absolute right-full mr-3 px-3 py-1.5 bg-slate-950/95 border border-slate-800 rounded-lg text-slate-200 text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl pointer-events-none uppercase tracking-wider">Discuss Project</span>
+        </a>
+
+        <!-- Up Arrow -->
+        <a href="#" class="w-12 h-12 bg-slate-900 border border-slate-800 text-slate-300 rounded-full flex items-center justify-center shadow-xl hover:text-white hover:border-slate-600 transition-colors active:scale-95" aria-label="Scroll to top">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        </a>
+    </div>
+
+    <!-- CORE SCRIPTS -->
+    <script>
+        // Custom Scroll animation triggers
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const checkReveal = () => {
+                const triggerPoint = window.innerHeight * 0.85;
+                reveals.forEach(el => {
+                    const top = el.getBoundingClientRect().top;
+                    if(top < triggerPoint) {
+                        el.classList.add('active');
+                    }
+                });
+            };
+
+            // Run on load and on scroll
+            window.addEventListener('scroll', checkReveal);
+            checkReveal();
+
+            // Navbar shadow state tweak
+            const nav = document.getElementById('main-nav');
+            const toggleNavbarShadow = () => {
+                if(window.scrollY > 50) {
+                    nav.classList.add('shadow-2xl', 'shadow-slate-950/20');
+                    nav.classList.remove('top-8');
+                    nav.classList.add('top-4');
+                } else {
+                    nav.classList.remove('shadow-2xl', 'shadow-slate-950/20');
+                    nav.classList.remove('top-4');
+                    nav.classList.add('top-8');
+                }
+            };
+            window.addEventListener('scroll', toggleNavbarShadow);
+            toggleNavbarShadow();
+        });
+
+        // Interactive package selection filling logic
+        function selectPricingPackage(packageName) {
+            const selectEl = document.getElementById('package-select');
+            if(selectEl) {
+                selectEl.value = packageName;
+                // Dispatch event to trigger Alpine.js x-model updates
+                selectEl.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+</body>
+</html>
